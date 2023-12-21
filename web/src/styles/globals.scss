@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,900;1,100;1,200;1,300;1,400;1,500&family=Red+Hat+Display:wght@400;500;700;900&family=Sora:wght@400;700&display=swap");
+@import "./Reset.scss";
+
+:root {
+
+  --poppins: "Poppins", sans-serif;
+  --rhd: "Red Hat Display", sans-serif;
+  --white: #ffffff;
+  --white-1: rgba(255, 255, 255, 0.3);
+  --white-2: rgba(255, 255, 255, 0.6);
+  --white-3: rgba(255, 255, 255, 0.75);
+
+  --black-1: rgba(18, 18, 18, 0.3);
+  --black-2: rgba(18, 18, 18, 0.6);
+  --black-3: rgba(18, 18, 18, 0.75);
+
+  --gray-1: #f7f9fc;
+  --gray-2: #edf0f7;
+  --gray-3: #e2e7f0;
+  --gray-4: #cbd2e0;
+  --gray-5: #a0abc0;
+  --gray-6: #717d96;
+  --gray-7: #4a5468;
+  --gray-8: #2d3648;
+  --gray-9: #1a202c;
+
+  --blue-1: #daeee5;
+
+  --green-05: #f7f9fc;
+  --green-1: #73ffbc;
+  --green-2: #045741;
+
+
+  --graphite-1: #4d5673;
+  --graphite-2: #222633;
+  --graphite-3: #11131a;
+
+  --title-1: 40px;
+  --title-2: 24px;
+  --title-3: 18px;
+
+  --info-1: #d0e2ff;
+  --info-2: #73a7f9;
+  --info-3: #2966c8;
+  --info-4: #0f408c;
+
+  --text-1: normal var(--poppins) 400 0.875rem/1.5rem none;
+  --text-2: normal var(--poppins) 400 0.875rem/1.25rem none;
+  --text-3: normal var(--poppins) 400 0.75rem/1.125rem none;
+
+  --gradiente-graphite-2: linear-gradient(
+    98.21deg,
+    #11131a 0.38%,
+    #222633 100%
+  );
+}
+html,
+body {
+  font-family: var(--poppins);
+  --webkit-font-smoothing: antialiased;
+  @media screen and (min-width: 1024px) and (max-with: 1899px) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: 1900px) {
+    font-size: 20px;
+  }
+}

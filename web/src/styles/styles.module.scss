@@ -1,15 +1,34 @@
-.container{
-  padding: 5.1875rem 0;
-  margin: 0 auto;
-  height: auto;
-  width: 100%;
+@import "~hamburgers/dist/hamburgers.min.css";
+
+//Login
+.container_login{
+  height: 100vh;
   background: var(--green-1);
 
+
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
 }
+.form_box{
+  width: 18rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+   
+  button{
+    padding: 1rem;
+    background: var(--green-2);
+    border-radius: 0.5rem;
+    font-size: var(--title-3);
+    font-weight: 500;
+  }
+  
+}
+
 .box_log{
   width: 30.5rem;
   height: 36.75rem;
@@ -29,22 +48,6 @@
     padding-bottom: 2rem;
   }
 } 
-.form_box{
-  width: 18rem;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  button{
-    padding: 1rem;
-    background: var(--green-2);
-    border-radius: 0.5rem;
-    font-size: var(--title-3);
-    font-weight: 500;
-  }
-  
-}
 .input_label_box{
   display: flex;
   flex-direction: column;
@@ -60,32 +63,40 @@
     font-size: 1rem;
   }
 }
+
+//Pesquisa
+.container { 
+   width: 100%;
+ 
+    }
+
+.box{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    
+}
+.box_dash_login{
+  display: flex;
+
+}
+
+
+
 .cont_dashboard{
-  height: auto;
   width: 100%;
-
-
+  
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-.box_navbar{
-  height: 4rem;
-  width: 100%;
-  background: var(--green-1);
- 
-  display: flex;
-  align-items: end;
-  justify-content: center;
-  flex-direction: column;
 
-}
 .box_dash_search{
- 
   margin: 0 auto;
   height: 30rem;
   width: 100%;
+ 
 
   display: flex;
   // align-items: center;
@@ -123,10 +134,9 @@
 }
 .box_search_info{
   gap: 1rem;
-  width: 50%;
-  height: 5rem;
-  margin-top: 2rem;
-
+  width: 80%;
+  overflow: auto;
+   
 
   input{
   height: 2rem;
@@ -136,4 +146,50 @@
   font-size: var(--title-3);
   color: var(--green-2);
   }
+}
+.box_search_input{
+  gap: 1rem;
+  width: 80%;
+  height: 4rem;
+   
+
+  input{
+  height: 2rem;
+  border: 0;
+  border-bottom: 2px solid var(--green-2) ;
+  outline: 0;
+  font-size: var(--title-3);
+  color: var(--green-2);
+  }
+}
+.box_search_princi{
+  width: 100%;
+  height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+//Formulario
+.cont_form{
+  width: 100%;
+
+   display: flex;
+   flex-direction: column;
+
+}
+.box_form_info{
+  width: 90%;
+
+  margin: 0;
+  padding: 0;
+  
+
+}
+
+.box_cad_form{
+  display: flex;
+ align-items: start;
+  margin: 2rem 0;
+  padding: 0;
+   
 }

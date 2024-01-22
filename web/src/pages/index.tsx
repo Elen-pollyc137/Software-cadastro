@@ -30,7 +30,7 @@ export default function Home() {
   }
 
   return (
-    <section className={styles.container}>
+    <section className={styles.container_login}>
       <div className={styles.box_log}>
         <h1>Faça seu login</h1>
         <form

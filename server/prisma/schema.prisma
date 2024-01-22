@@ -17,25 +17,28 @@ model User {
 }
 
 model Familyreference {
-  id             String   @id @default(uuid())
-  userId         String
-  name           String
-  cpf            String
-  nis            String
-  rg             String
-  titulo         String
-  naturalness    String
-  nameMother     String
-  nameFather     String
-  birthdayDate   String
-  surname        String
-  phoneNumber    String
-  matrialStatus  String
-  education      String
-  elderlyPerson  String
-  disabledPerson String
-  folderNunber   String
-  createdAt      DateTime @default(now())
-  isPublic       Boolean  @default(false)
-  User           User     @relation(fields: [userId], references: [id])
+  id               String   @id @default(uuid())
+  userId           String
+  name             String
+  cpf              String
+  nis              String
+  rg               String
+  titulo           String
+  naturalness      String
+  nameMother       String
+  nameFather       String
+  birthdayDate     String
+  surname          String
+  phoneNumber      String
+  matrialStatus    String
+  education        String
+  elderlyPerson    String
+  disabledPerson   String
+  folderNunber     String
+  domicileLocation String
+  neighborhood     String
+  serviceHistory   String
+  createdAt        DateTime @default(now())
+  isPublic         Boolean  @default(false)
+  User             User     @relation(fields: [userId], references: [id])
 }

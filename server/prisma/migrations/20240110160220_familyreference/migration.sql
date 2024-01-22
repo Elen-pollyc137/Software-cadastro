@@ -18,6 +18,9 @@ CREATE TABLE "Familyreference" (
     "elderlyPerson" TEXT NOT NULL,
     "disabledPerson" TEXT NOT NULL,
     "folderNunber" TEXT NOT NULL,
+    "domicileLocation" TEXT NOT NULL,
+    "neighborhood" TEXT NOT NULL,
+    "serviceHistory" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "isPublic" BOOLEAN NOT NULL DEFAULT false,
     CONSTRAINT "Familyreference_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE

@@ -1,12 +1,13 @@
-import { FastifyInstance } from 'fastify'
+import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { prisma } from '../lib/prisma'
 import { z } from 'zod'
 
 export async function familyReferenceRoutes(app: FastifyInstance) {
-  app.get('/familyreference', async (request) => {
-    await request.jwtVerify()
+  app.get('/familyreference', async () => {
     const users = await prisma.familyreference.findMany({
-      // Ordenar de novo por numero de pasta
+      where: {
+        isPublic: true,
+      },
       orderBy: {
         createdAt: 'asc',
       },
@@ -14,20 +15,32 @@ export async function familyReferenceRoutes(app: FastifyInstance) {
 
     return users
   })
-  app.get('/familyreference:id', async (request) => {
-    // const { id } = request.params
-    const paramsSchema = z.object({
-      id: z.string().uuid(),
-    })
 
-    const { id } = paramsSchema.parse(request.params)
-    const familyreference = await prisma.familyreference.findUniqueOrThrow({
-      where: {
-        id,
-      },
-    })
-    return familyreference
-  })
+  app.get(
+    '/familyreference/:id',
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      try {
+        const paramsSchema = z.object({
+          id: z.string().uuid(),
+        })
+        const { id } = paramsSchema.parse(request.params)
+        const familyReference = await prisma.familyreference.findUniqueOrThrow({
+          where: {
+            id,
+          },
+        })
+
+        if (!familyReference) {
+          return reply.status(404).send({ error: 'Family Reference not found' })
+        }
+
+        return familyReference
+      } catch (error) {
+        console.error(error)
+        return reply.status(500).send({ error: 'Internal Server Error' })
+      }
+    },
+  )
 
   app.post('/familyreference', async (request) => {
     const bodySchema = z.object({
@@ -47,6 +60,9 @@ export async function familyReferenceRoutes(app: FastifyInstance) {
       elderlyPerson: z.string(),
       disabledPerson: z.string(),
       folderNunber: z.string(),
+      domicileLocation: z.string(),
+      neighborhood: z.string(),
+      serviceHistory: z.string(),
       isPublic: z.coerce.boolean().default(false),
     })
     const {
@@ -66,6 +82,9 @@ export async function familyReferenceRoutes(app: FastifyInstance) {
       elderlyPerson,
       disabledPerson,
       folderNunber,
+      domicileLocation,
+      neighborhood,
+      serviceHistory,
       isPublic,
     } = bodySchema.parse(request.body)
     console.log(
@@ -91,49 +110,55 @@ export async function familyReferenceRoutes(app: FastifyInstance) {
         elderlyPerson,
         disabledPerson,
         folderNunber,
+        domicileLocation,
+        neighborhood,
+        serviceHistory,
         isPublic,
-        userId: userid,
+        userId: 'f217e395-044f-406f-867e-91f8d12a8775',
       },
     })
     return familyreference
   })
 
-  app.put('/familyreference:id', async (request) => {
+  app.put('/familyreference:id', async (request: FastifyRequest) => {
     const paramsSchema = z.object({
       id: z.string().uuid(),
     })
 
     const { id } = paramsSchema.parse(request.params)
     const bodySchema = z.object({
-      name: z.string(),
-      cpf: z.string(),
-      isPublic: z.coerce.boolean().default(false),
+      isPublic: z.coerce.boolean(),
     })
-    const { name, cpf, isPublic } = bodySchema.parse(request.body)
+    const { isPublic } = bodySchema.parse(request.body)
 
     const referenceatualizade = await prisma.familyreference.update({
       where: {
         id,
       },
       data: {
-        name,
-        cpf,
         isPublic,
       },
     })
     return referenceatualizade
   })
+  app.delete(
+    '/familyreference/:id',
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      try {
+        const paramsSchema = z.object({
+          id: z.string().uuid(),
+        })
+        const { id } = paramsSchema.parse(request.params)
 
-  app.delete('/familyreference', async (request) => {
-    const paramsSchema = z.object({
-      id: z.string().uuid(),
-    })
-
-    const { id } = paramsSchema.parse(request.params)
-    await prisma.familyreference.delete({
-      where: {
-        id,
-      },
-    })
-  })
+        await prisma.familyreference.delete({
+          where: {
+            id,
+          },
+        })
+      } catch (error) {
+        console.error(error)
+        return reply.status(500).send({ error: 'Internal Server Error' })
+      }
+    },
+  )
 }

@@ -55,7 +55,7 @@ export async function authRoutes(app: FastifyInstance) {
         // Atualiza o token no banco de dados
         const updatedUser = await prisma.user.update({
           where: { id: user.id }, // Não precisa incluir name aqui, já que estamos usando o ID
-          data: { token: authToken },
+          data: { token: authToken, name: user.name },
         })
 
         // Remova essa linha, pois parece ser desnecessária e pode causar confusão
@@ -63,6 +63,7 @@ export async function authRoutes(app: FastifyInstance) {
 
         // Envie a resposta com o novo token
         reply.send({ token: authToken })
+        return { authToken }
         console.log(userResponse)
       } catch (error) {
         console.error(error)

@@ -48,4 +48,41 @@ export async function userRoutes(app: FastifyInstance) {
       reply.status(500).send({ error: 'Internal Server Error' })
     }
   })
+
+  app.put(
+    '/users/:id',
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      try {
+        const paramsSchema = z.object({
+          id: z.string().uuid(),
+        })
+
+        const { id } = paramsSchema.parse(request.params)
+
+        const bodySchema = z.object({
+          name: z.string(),
+          email: z.string(),
+          password: z.number(),
+        })
+
+        const { name, email, password } = bodySchema.parse(request.body)
+
+        const updatedUser = await prisma.user.update({
+          where: {
+            id,
+          },
+          data: {
+            name,
+            email,
+            password,
+          },
+        })
+
+        reply.send(updatedUser)
+      } catch (error) {
+        console.error(error)
+        reply.status(500).send({ error: 'Internal Server Error' })
+      }
+    },
+  )
 }
